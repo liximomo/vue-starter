@@ -1,0 +1,55 @@
+@mixin makeWrapper($min-width, $width) {
+  margin: 0 auto;
+  min-width: $min-width;
+  width: $width;
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
+}
+
+@mixin center-by-margin($width, $height) {
+  width: $width;
+  height: $height;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -$width / 2;
+  margin-top: -$height / 2;
+}
+
+@mixin horizen-center-by-margin($width) {
+  width: $width;
+  overflow-x: hidden;
+  position: absolute;
+  left: 50%;
+  margin-left: -$width / 2;
+}
+
+@mixin n-items($n) {
+  &:first-child:nth-last-child(#{$n}),
+  &:first-child:nth-last-child(#{$n}) ~ & {
+    @content; 
+  }
+}
+
+@mixin least-items($n) {
+  &:first-child:nth-last-child(n+#{$n}),
+  &:first-child:nth-last-child(n+#{$n}) ~ & {
+    @content; 
+  }
+}
+
+@mixin most-items($n) {
+  &:first-child:nth-last-child(-n+#{$n}),
+  &:first-child:nth-last-child(-n+#{$n}) ~ & {
+    @content; 
+  }
+}
+
+@mixin between-items($l, $r) {
+  &:first-child:nth-last-child(n+#{$l}):nth-last-child(-n+#{$r}),
+  &:first-child:nth-last-child(n+#{$l}):nth-last-child(-n+#{$r}) ~ & {
+    @content; 
+  }
+}
