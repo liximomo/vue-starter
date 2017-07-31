@@ -7,14 +7,16 @@
 | 目录／文件| 说明|
 |:-------:|:---|
 | lib             | 有潜力跨项目应用的库 |
+| utils           | 存放通用工具函数(无关上下文的纯函数) |
 | components      | app 组件 |
-| pages           | app 的所有页面 |
 | layouts         | 页面布局 |
+| pages           | app 的所有页面 |
 | modules         | vuex 模块 |
+| style           | scss样式 |
+| routes          | 路由定义 |
 | store.js        | vuex stored定义 |
 | App.vue         | app 根组件 |
 | main.js         | 入口文件 |
-| utils           | 存放通用工具函数(无关上下文的纯函数) |
 
 ## 构建
 
