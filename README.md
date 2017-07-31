@@ -6,13 +6,15 @@
 
 | 目录／文件| 说明|
 |:-------:|:---|
-| components      | 存放 app 的所有组件 |
-| module          | 存放 vuex 相关模块 |
+| lib             | 有潜力跨项目应用的库 |
+| components      | app 组件 |
 | pages           | app 的所有页面 |
-| layout          | 布局文件|
-| path.js         | 定义 app 所有的 url 路径|
+| layouts         | 页面布局 |
+| modules         | vuex 模块 |
+| store.js        | vuex stored定义 |
 | App.vue         | app 根组件 |
 | main.js         | 入口文件 |
+| utils           | 存放通用工具函数(无关上下文的纯函数) |
 
 ## 构建
 

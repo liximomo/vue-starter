@@ -1,23 +1,29 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
-  </div>
+  <main-layout>
+    <div class="section">
+      <img src="./assets/logo.png">
+      <router-view></router-view>
+    </div>
+  </main-layout>
 </template>
 
 <script>
+import mainLayout from '@/layouts/main';
+
 export default {
   name: 'app',
+  components: {
+    mainLayout,
+  },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import 'global.scss';
+
+.section {
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>
