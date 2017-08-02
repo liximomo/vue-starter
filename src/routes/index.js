@@ -1,17 +1,16 @@
 import Loadable from '@/components/Loadable';
 
-const routes = {
+export default {
   routes: [
     {
+      name: 'home',
       path: '/',
-      name: 'hello',
-      component: Loadable(() => import(/* webpackChunkName: "home" */ '../pages/home')),
+      component: Loadable(() => import(/* webpackChunkName: "home" */ '../pages/Home')),
     },
     {
-      path: '/about',
       name: 'about',
-      component: Loadable(() => import(/* webpackChunkName: "about" */ '../pages/about')),
+      path: '/about',
+      component: Loadable(() => import(/* webpackChunkName: "about" */ '../pages/About')),
     },
   ],
 };
-export default routes;

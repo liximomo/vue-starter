@@ -1,7 +1,7 @@
 <template>
-  <div class="hello">
+  <div :style="{ textAlign: 'center'}">
     <h1>About</h1>
-    <p>Vue Particle</p>
+    <p>Vue Practice</p>
     <p>Author: liximmo</p>
   </div>
 </template>

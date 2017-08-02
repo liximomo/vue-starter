@@ -1,13 +1,13 @@
 function genPendingType(type) {
-  return `${type}--PENDING`;
+  return `${type}_PENDING`;
 }
 
 function genSuccessType(type) {
-  return `${type}--DONE`;
+  return `${type}_DONE`;
 }
 
 function genFailType(type) {
-  return `${type}--FAIL`;
+  return `${type}_FAIL`;
 }
 
 function isPromise(val) {

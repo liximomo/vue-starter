@@ -6,6 +6,7 @@ import Router from 'vue-router';
 import App from './App';
 import store from './store';
 import routes from './routes';
+import * as path from './path';
 
 Vue.config.productionTip = false;
 Vue.use(Router);
@@ -17,4 +18,9 @@ new Vue({
   store,
   template: '<App/>',
   components: { App },
+
+  // 依赖提供器 提供全局对象供子组件访问
+  provide: {
+    path,
+  },
 });

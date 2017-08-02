@@ -17,6 +17,7 @@ const store = new Vuex.Store({
   },
 });
 
+// add dispatchApi method to store
 plug2Store(store, API_ACTION);
 
 if (process.env.NODE_ENV === 'development') {
