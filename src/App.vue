@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import mainLayout from '@/layouts/main';
+import mainLayout from '@/layouts/Main';
 
 export default {
   name: 'app',
@@ -35,31 +35,10 @@ export default {
 
 <style lang="scss">
 @import 'global.scss';
-</style>
 
-<style lang="scss" scoped>
 .section {
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;
-}
-
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>

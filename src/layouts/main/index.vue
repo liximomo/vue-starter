@@ -1,9 +1,9 @@
 <template>
-  <div class="site">
-    <div class="header">
+  <div>
+    <div class="Layout__Header">
       <h1>头部</h1>
     </div>
-    <div class="content">
+    <div class="Layout__Content">
       <slot> content </slot>
     </div>
   </div>
@@ -16,14 +16,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.header {
+<style>
+.Layout__Header {
   height: 20vh;
   background-color: #2196f3;
   color: white;
-}
-
-h1 {
-  margin-top: 0;
 }
 </style>
