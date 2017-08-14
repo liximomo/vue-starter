@@ -1,9 +1,9 @@
 <template>
   <main-layout>
-    <div class="section">
+    <div class="Section">
       <img src="./assets/logo.png">
     </div>
-    <div class="section">
+    <div class="Section">
       <h1>Welcome to Your Vue.js App</h1>
       <h2>Pages</h2>
       <ul>
@@ -36,7 +36,7 @@ export default {
 <style lang="scss">
 @import 'global.scss';
 
-.section {
+.Section {
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;

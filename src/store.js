@@ -2,23 +2,25 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import user from './modules/user';
-import apiAction, { plug2Store } from './lib/vuex-api-action';
+import createfluxAction, { createPlugin } from './lib/vuex-flux-action';
 
 Vue.use(Vuex);
 
-const API_ACTION = 'API_ACTION';
+const FLUX_ACTION = 'FLUX_ACTION';
 const store = new Vuex.Store({
   strict: true,
+  plugins: [
+    // add dispatchApi method to store
+    createPlugin(FLUX_ACTION),
+  ],
   modules: {
     user,
+    // chatroom,
   },
   actions: {
-    [API_ACTION]: apiAction,
+    [FLUX_ACTION]: createfluxAction(FLUX_ACTION),
   },
 });
-
-// add dispatchApi method to store
-plug2Store(store, API_ACTION);
 
 if (process.env.NODE_ENV === 'development') {
   window.store = store;

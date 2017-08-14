@@ -1,3 +1,5 @@
+import createKeyGetters from '../utils/createKeyGetters';
+
 const defaultState = {
   username: 'liximomo',
 };
@@ -7,20 +9,14 @@ function userNameMt(state, username) {
   state.username = username;
 }
 
-// getters
-function userGt(state) {
-  return state.username;
-}
-
-// mutation types
-export const SET_USERNAME = 'SET_USERNAME';
+export const USER_SET_USERNAME = 'USER_SET_USERNAME';
 
 export default {
   state: defaultState,
   getters: {
-    user: userGt,
+    ...createKeyGetters(defaultState, 'user$'),
   },
   mutations: {
-    [SET_USERNAME]: userNameMt,
+    [USER_SET_USERNAME]: userNameMt,
   },
 };
