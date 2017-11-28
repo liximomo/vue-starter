@@ -18,25 +18,32 @@ function isFunction(val) {
   return typeof val === 'function';
 }
 
-function ServerException(message) {
-  this.message = message;
-  this.name = 'ServerException';
-}
-
 function createFluxActionDispatch(dispatch, actionName) {
   return action => dispatch(actionName, action, { root: true });
 }
 
-export default function createfluxAction(actionName) {
+export function ServerException(code, message, data) {
+  this.code = code;
+  this.message = message;
+  this.data = data;
+  this.name = 'ServerException';
+}
+
+export function createfluxAction(actionName) {
   return (contenxt, action) => {
+    if (action.error) {
+      throw action.payload;
+    }
+
     const { dispatch, commit } = contenxt;
     const { type, payload, meta } = action;
     const dispatchFluxAction = createFluxActionDispatch(dispatch, actionName);
-    const safeCommit = (mutaion) => {
+    const safeCommit = (mutaion, ...args) => {
       try {
-        commit(mutaion);
+        commit(mutaion, ...args);
       } catch (error) {
-        // do nothing
+        // eslint-disable-next-line no-console
+        console.log('vuex error during commit mutation:', error);
       }
     };
 
@@ -48,20 +55,26 @@ export default function createfluxAction(actionName) {
 
       safeCommit(genPendingType(type));
 
+      let serverSesponse;
       return payload
-        .then(response => response.json())
+        .then((response) => {
+          serverSesponse = response;
+          return response.json();
+        })
         .then((json) => {
-          if (json.code !== 200) {
-            throw new ServerException(json.msg || '发生错误！');
+          if (!serverSesponse.ok) {
+            throw new ServerException(json.code, json.message || '发生错误！', json.data);
           }
 
           safeCommit(genSuccessType(type), {
             ...action,
-            payload: json.data,
+            payload: json,
           });
+          return json;
         })
         .catch((error) => {
           if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
             console.error(error);
           }
 
@@ -84,18 +97,20 @@ export default function createfluxAction(actionName) {
     // 处理 promise
     if (isPromise(payload)) {
       return payload.then(
-        result =>
+        (result) => {
           commit({
             ...action,
             payload: result,
-          }),
+          });
+          return result;
+        },
         (error) => {
           commit({
             ...action,
             payload: error,
             error: true,
           });
-          Promise.reject(error);
+          throw error;
         },
       );
     }
@@ -112,5 +127,12 @@ export function createPlugin(actionName) {
   return (store) => {
     const dispatch = store.dispatch.bind(store);
     store.dispatchFluxAction = createFluxActionDispatch(dispatch, actionName);
+  };
+}
+
+export default function fluxAction({ actionName = 'FLUX_ACTION' } = {}) {
+  return {
+    action: createfluxAction(actionName),
+    plugin: createPlugin(actionName),
   };
 }

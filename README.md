@@ -24,10 +24,19 @@
 ### css
 * 禁止使用 `scope` 属性, 除全局类名外，所有 css 命名严格遵循 BEM范式。
 
-### API
+### VUEX
+
+#### COMMON
+1. 禁止使用命名空间模块。所有 `action`, `getter` 的命名需自带命名空间。
+1. 所有的 `action` 常量名定义必须加上 `module` 名前缀，避免命名冲突。 如：`modules/user.js` 中的 `action` 必须加 `USER_` 前缀, `USER_SET_USERNAME`, `USER_LOGOUT`, `USER_IN`。
+1. 所有的 `action` 都必须用 `src/lib/vuex-flux-action/createAction` 方式产出。
+1. 所有的 `action` 都必须以 `store.dispatchFluxAction($action)` 的形式递交。
+1. 所有的 `getter` 名必须加上模块前缀，参考 modules/user.js。
+
+#### API
 
 1. api 请求必须定义为一个常量, 冠以 `REQUEST_` 前缀。
-1. api 请求必须通过 `src/utils/createAction` 产出一个 `apiACtion`, 然后通过 `store.dispatchApi(apiACtion)` 的方式效。
+1. api 请求必须通过 `src/lib/vuex-flux-action/createApiAction` 产出一个 `apiACtion`。
 1. 请求会产生3个 vuex 的 mutation 操作：`${apiName}_PENDING`, `${apiName}_DONE`, `${apiName}_FAIL`, 分别代表等待请求结果中，请求完成，请求失败，
   
   example:
